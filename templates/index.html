@@ -2,20 +2,60 @@
 <html>
 <head>
     <title>MyWay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            background: #0f0f0f;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        p {
+            color: #aaaaaa;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    <h1>MyWay - Your Personalized Career Roadmap</h1>
-
-
+    <h1>MyWay</h1>
+    <p>Your personalized career roadmap inspired by the world's greatest tech leaders.</p>
     <form method="POST" action="/generate">
-
-        <input type="text" name="year" placeholder="What year are you in?">
-        <input type="text" name="skills" placeholder="what's your current skills?">
-        <input type="text" name="targeted_role" placeholder="what is your targeted role?">
-        <input type="text" name="dream_company" placeholder="which is your dream company?">
-        <input type="text" name="hours_commitment" placeholder="how many hours you are willing to dedicate?">
-
-        <button type="submit">Generate</button>
+        <input type="text" name="year" placeholder="What year are you in CS?" required>
+        <input type="text" name="skills" placeholder="What are your current skills?" required>
+        <input type="text" name="targeted_role" placeholder="What is your target role?" required>
+        <input type="text" name="dream_company" placeholder="What is your dream company?" required>
+        <input type="text" name="hours_commitment" placeholder="Hours per week you can dedicate?" required>
+        <button type="submit">Generate My Roadmap →</button>
     </form>
 </body>
 </html>
