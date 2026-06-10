@@ -53,7 +53,7 @@ Start your response by mentioning which leader's path inspired this roadmap and 
         messages=[{"role": "user", "content": prompt}]
     )
 
-    return message.content[0].text
+    return render_template('result.html', roadmap=message.content[0].text)
 
 if __name__ == '__main__':
     app.run(debug=True)
