@@ -3,6 +3,23 @@
 <head>
     <title>MyWay</title>
     <style>
+    #spinner {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+        color: #aaaaaa;
+        font-size: 16px;
+    }
+
+    .dot-animate {
+    animation: blink 1.4s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 1; }
+    }
+
         body {
             font-family: Arial, sans-serif;
             max-width: 700px;
@@ -57,5 +74,27 @@
         <input type="text" name="hours_commitment" placeholder="Hours per week you can dedicate?" required>
         <button type="submit">Generate My Roadmap →</button>
     </form>
+    <div id="spinner">
+        <p id="spinner-text">Analyzing your profile<span class="dot-animate">...</span></p>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            document.querySelector('button').style.display = 'none';
+            document.getElementById('spinner').style.display = 'block';
+        
+            const messages = [
+                "Analyzing your profile",
+                "Matching you with a leader",
+                "Generating your roadmap"
+            ];
+        
+        let i = 0;
+        setInterval(function() {
+            i = (i + 1) % messages.length;
+            document.getElementById('spinner-text').innerHTML = messages[i] + '<span class="dot-animate">...</span>';
+        }, 1500);
+    });
+</script>
 </body>
 </html>
