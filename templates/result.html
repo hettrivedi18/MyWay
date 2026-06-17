@@ -5,24 +5,67 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 60px auto;
             background: #0f0f0f;
             color: #ffffff;
             padding: 0 20px;
             line-height: 1.8;
         }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-        }
-        .roadmap {
+        h1 { font-size: 2rem; margin-bottom: 5px; }
+        h2 { font-size: 1.3rem; color: #aaaaaa; margin-bottom: 30px; font-weight: normal; }
+        h3 { font-size: 1.1rem; color: #ffffff; margin-bottom: 10px; }
+        .card {
             background: #1a1a1a;
             border-radius: 12px;
-            padding: 30px;
-            white-space: pre-wrap;
+            padding: 20px 24px;
+            margin-bottom: 16px;
         }
-        a {
+        .tag {
+            display: inline-block;
+            background: #2a2a2a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-bottom: 10px;
+        }
+        .task { 
+            padding: 6px 0;
+            border-bottom: 0.5px solid #2a2a2a;
+            font-size: 14px;
+            color: #cccccc;
+        }
+        .task:last-child { border-bottom: none; }
+        .skill {
+            display: inline-block;
+            background: #1e3a2a;
+            color: #4ade80;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+        }
+        .milestone {
+            padding: 8px 0;
+            border-bottom: 0.5px solid #2a2a2a;
+            font-size: 14px;
+            color: #cccccc;
+        }
+        .milestone:last-child { border-bottom: none; }
+        .schedule-row {
+            display: grid;
+            grid-template-columns: 120px 60px 1fr;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 0.5px solid #2a2a2a;
+            font-size: 14px;
+        }
+        .schedule-row:last-child { border-bottom: none; }
+        .day { color: #ffffff; font-weight: 500; }
+        .hours { color: #4ade80; }
+        .activity { color: #aaaaaa; }
+        .back-btn {
             display: inline-block;
             margin-top: 30px;
             padding: 12px 24px;
@@ -32,14 +75,60 @@
             text-decoration: none;
             font-weight: bold;
         }
-        a:hover {
-            background: #dddddd;
+        .leader-box {
+            background: #1a1a1a;
+            border-left: 3px solid #4ade80;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
         }
     </style>
 </head>
 <body>
     <h1>Your MyWay Roadmap</h1>
-    <div class="roadmap">{{ roadmap }}</div>
-    <a href="/">Generate Another</a>
+
+    <div class="leader-box">
+        <h3>🎯 Modeled after: {{ data.leader_name }}</h3>
+        <p style="color:#aaaaaa; font-size:14px;">{{ data.leader_reason }}</p>
+    </div>
+
+    <h3 style="margin-bottom:12px;">📅 Phases</h3>
+    {% for phase in data.phases %}
+    <div class="card">
+        <span class="tag">{{ phase.duration }}</span>
+        <h3>{{ phase.name }}</h3>
+        <p style="color:#aaaaaa; font-size:14px;">{{ phase.goal }}</p>
+        {% for task in phase.tasks %}
+        <div class="task">→ {{ task }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="card" style="margin-top:24px;">
+        <h3>📆 Weekly Schedule</h3>
+        {% for item in data.weekly_schedule %}
+        <div class="schedule-row">
+            <span class="day">{{ item.day }}</span>
+            <span class="hours">{{ item.hours }}h</span>
+            <span class="activity">{{ item.activity }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+        <h3>🛠 Skills to Cover</h3>
+        {% for skill in data.skills_to_cover %}
+        <span class="skill">{{ skill }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+        <h3>🏁 Milestones</h3>
+        {% for milestone in data.milestones %}
+        <div class="milestone">✓ {{ milestone }}</div>
+        {% endfor %}
+    </div>
+
+    <a href="/" class="back-btn">Generate Another →</a>
 </body>
 </html>
